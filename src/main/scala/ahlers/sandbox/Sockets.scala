@@ -2,10 +2,10 @@ package ahlers.sandbox
 
 import java.net.InetSocketAddress
 
-import akka.actor.{ActorLogging, ActorRef, ActorSystem, FSM, Props, UnboundedStash}
-import akka.io.{IO, Tcp}
+import akka.actor.{ ActorLogging, ActorRef, ActorSystem, FSM, Props, UnboundedStash }
+import akka.io.{ IO, Tcp }
 import akka.pattern._
-import akka.util.{ByteString, Timeout}
+import akka.util.{ ByteString, Timeout }
 
 import scala.concurrent.duration._
 import scala.language.postfixOps
@@ -64,7 +64,7 @@ class Client extends FSM[Client.State, ActorRef] with UnboundedStash with ActorL
       IO(Tcp) ! connect
       stay
 
-    case Event(CommandFailed(connect:Connect), _) =>
+    case Event(CommandFailed(connect: Connect), _) =>
       log.error("Couldn't connect to {}.", connect.remoteAddress)
       context stop self
       stay
@@ -169,7 +169,7 @@ class Server extends FSM[Server.State, Server.Data] with UnboundedStash with Act
       sender ! Write(data)
       stay
 
-    case Event(_:ConnectionClosed, _) =>
+    case Event(_: ConnectionClosed, _) =>
       log.info("A connection was closed.")
       stay
 
