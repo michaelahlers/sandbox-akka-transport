@@ -5,3 +5,5 @@ version := "1.0"
 
 scalaVersion := Versions.Scala
 scalacOptions ++= Compiler.scalacOptions
+
+cancelable in Global := true
